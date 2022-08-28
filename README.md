@@ -14,7 +14,7 @@ npx create-next-app@latest --typescript
 add chakra-ui
 
 ```bash
-npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
+npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion aws-amplify
 ```
 
 add amplify
