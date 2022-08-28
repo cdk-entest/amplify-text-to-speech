@@ -6,6 +6,7 @@
 .pnp.js
 **aws-exports.js
 **aws-exports.json
+amplify
 
 # testing
 /coverage
