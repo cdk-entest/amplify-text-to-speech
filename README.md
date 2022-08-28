@@ -1,9 +1,21 @@
+---
+title: Amplify Text To Speech
+description: Amplify Text To Speech
+author: haimtran
+publishedDate: 08/10/2022
+date: 2022-08-10
+---
+
 ## Introduction
 
-Play with amplify predictions api
+[GitHub](https://github.com/entest-hai/amplify-text-to-speech) shows how to setup and use amplify text to speech api. Amplify provides many AI/ML services such as text to speed, translation, text identification, etc [predictions](https://docs.amplify.aws/lib/predictions/intro/q/platform/js/)
 
-- text to speech
-- text identification
+<LinkedImage
+  href="https://youtu.be/0z_hqB4wh_Y"
+  height={400}
+  alt="Amplify Text To Speech"
+  src="/thumbnail/amplify-text-to-speech.png"
+/>
 
 ## Init nextjs project
 
@@ -46,18 +58,18 @@ amplify add predictions
 in \_app.ts configure amplify
 
 ```tsx
-import type { AppProps } from "next/app";
-import { ChakraProvider } from "@chakra-ui/react";
-import { Amplify, Auth, Predictions } from "aws-amplify";
-import { AmazonAIPredictionsProvider } from "@aws-amplify/predictions";
-import awsconfig from "./../src/aws-exports";
+import type { AppProps } from 'next/app'
+import { ChakraProvider } from '@chakra-ui/react'
+import { Amplify, Auth, Predictions } from 'aws-amplify'
+import { AmazonAIPredictionsProvider } from '@aws-amplify/predictions'
+import awsconfig from './../src/aws-exports'
 try {
-  Amplify.configure(awsconfig);
-  Amplify.register(Predictions);
-  Amplify.register(Auth);
-  Predictions.addPluggable(new AmazonAIPredictionsProvider());
+  Amplify.configure(awsconfig)
+  Amplify.register(Predictions)
+  Amplify.register(Auth)
+  Predictions.addPluggable(new AmazonAIPredictionsProvider())
 } catch (error) {
-  console.log(error);
+  console.log(error)
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -65,7 +77,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ChakraProvider>
       <Component {...pageProps} />
     </ChakraProvider>
-  );
+  )
 }
 ```
 
@@ -122,23 +134,23 @@ const convert = () =>
   Predictions.convert({
     textToSpeech: {
       source: {
-        text: text,
+        text: text
       },
-      voiceId: "Kimberly",
-    },
-  }).then((result) => {
-    const audioCtx = new AudioContext();
-    const source = audioCtx.createBufferSource();
+      voiceId: 'Kimberly'
+    }
+  }).then(result => {
+    const audioCtx = new AudioContext()
+    const source = audioCtx.createBufferSource()
     audioCtx.decodeAudioData(
       result.audioStream,
-      (buffer) => {
-        source.buffer = buffer;
-        source.connect(audioCtx.destination);
-        source.start(0);
+      buffer => {
+        source.buffer = buffer
+        source.connect(audioCtx.destination)
+        source.start(0)
       },
-      (error) => {
-        console.log(error);
+      error => {
+        console.log(error)
       }
-    );
-  });
+    )
+  })
 ```
